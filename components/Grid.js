@@ -8,12 +8,13 @@ const Wrapper = styled.div`
   color: black;
 `;
 
-const Grid = ({ cardList }) => (
+const Grid = ({ videos }) => (
   <Wrapper>
     {
-      cardList.map((cardInfo) => (
+      videos.map(videoInfo => (
         <Card
-          cardInfo
+          key={videoInfo.id}
+          videoInfo={videoInfo}
         />
       ))
     }
@@ -21,7 +22,7 @@ const Grid = ({ cardList }) => (
 );
 
 Grid.propTypes = {
-  cardList: PropTypes.arrayOf(PropTypes.shape({
+  videos: PropTypes.arrayOf(PropTypes.shape({
     captions: PropTypes.arrayOf(PropTypes.string),
     duration: PropTypes.number.isRequired,
     thumbnail: PropTypes.string.isRequired,

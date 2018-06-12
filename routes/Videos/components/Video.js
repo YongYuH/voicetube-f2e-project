@@ -4,7 +4,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import FilterConditionBar from '../../../components/FilterConditionBar';
-import Card from '../../../components/Card';
+import GridContainer from '../../../components/GridContainer';
 
 class Video extends PureComponent {
   componentDidMount() {
@@ -15,7 +15,7 @@ class Video extends PureComponent {
     return (
       <Fragment>
         <FilterConditionBar />
-        <Card />
+        <GridContainer />
       </Fragment>
     );
   }

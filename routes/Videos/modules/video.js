@@ -3,7 +3,7 @@ import {
   put,
   takeLatest,
 } from 'redux-saga/effects';
-import fetch from 'isomorphic-unfetch';
+import getWithQuery from '../../../utils/api';
 
 // - Actions
 export const FETCH_VIDEOS_REQUEST = 'FETCH_VIDEOS_REQUEST';
@@ -14,7 +14,7 @@ export const FETCH_VIDEOS_FAIL = 'FETCH_VIDEOS_FAIL';
 export const initialState = {
   errorMessage: '',
   isFetching: false,
-  videos: [],
+  list: [],
 };
 
 // - Reducer
@@ -30,7 +30,7 @@ export const reducer = (state = initialState, action = {}) => {
         ...state,
         errorMessage: '',
         isFetching: false,
-        videos: action.payload.videos,
+        list: action.payload.videos,
       };
     case FETCH_VIDEOS_FAIL:
       return {
@@ -59,14 +59,7 @@ export const fetchVideosFail = ({ message }) => ({
 });
 
 // - Selectors
-export const getPhotoUrl = state => state.Videos.photoUrl;
-export const getUserId = state => state.Videos.userId;
-
-// - Api
-export const getWithQuery = ({ url }) => (
-  fetch(url)
-    .then(r => r.json())
-);
+export const getVideos = state => state.videos.list;
 
 // - Sagas
 export function* fetchVideos() {

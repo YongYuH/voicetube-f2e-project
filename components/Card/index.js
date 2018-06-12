@@ -11,37 +11,34 @@ const Title = styled.div`
 const Wrapper = styled.div`
   background-color: white;
   color: black;
+  height: 228px;
+  width: 240px;
 `;
 
-const Card = ({
-  captions,
-  duration,
-  level,
-  thumbnail,
-  title,
-  views,
-}) => (
+const Card = ({ videoInfo }) => (
   <Wrapper>
     <Thumbnail
-      duration={duration}
-      src={thumbnail}
+      duration={videoInfo.duration}
+      thumbnail={videoInfo.thumbnail}
     />
     <Title>
-      {title}
+      {videoInfo.title}
     </Title>
-    <ViewNumber views={views} />
-    {/* <Tag label={captions[0]} /> */}
-    <Tag label={level} />
+    <ViewNumber views={videoInfo.views} />
+    {/* <Tag />
+    <Tag label={level} /> */}
   </Wrapper>
 );
 
 Card.propTypes = {
-  captions: PropTypes.arrayOf(PropTypes.string).isRequired,
-  duration: PropTypes.number.isRequired,
-  level: PropTypes.number.isRequired,
-  thumbnail: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  views: PropTypes.number.isRequired,
+  videoInfo: PropTypes.shape({
+    captions: PropTypes.arrayOf(PropTypes.string).isRequired,
+    duration: PropTypes.number.isRequired,
+    level: PropTypes.number.isRequired,
+    thumbnail: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    views: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default Card;

@@ -1,17 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
-const Duration = styled.div`
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
-`;
+import Duration from './Duration';
 
 const StyledImage = styled.img`
   background-color: white;
+  height: 181px;
+  position: relative;
+  top: -23px;
+  width: 100%;
 `;
 
 const Wrapper = styled.div`
+  height: 135px;
+  overflow: hidden;
+  width: 100%;
 `;
 
 const Thumbnail = ({
@@ -20,9 +23,7 @@ const Thumbnail = ({
 }) => (
   <Wrapper>
     <StyledImage src={thumbnail} />
-    <Duration>
-      {duration}
-    </Duration>
+    <Duration duration={duration} />
   </Wrapper>
 );
 
