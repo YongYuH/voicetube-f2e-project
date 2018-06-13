@@ -6,13 +6,15 @@
   "scripts": {
     "build": "next build",
     "dev": "next",
-    "start": "next start",
+    "heroku-postbuild": "next build",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.16.3",
     "isomorphic-unfetch": "^2.0.0",
     "material-ui": "^0.20.1",
     "next": "^6.0.3",
