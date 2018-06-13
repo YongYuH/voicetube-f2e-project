@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import EmptyDescription from './EmptyDescription';
+import LoadingIcon from './LoadingIcon';
 import Card from './Card';
 
 const Wrapper = styled.div`
   color: black;
-  /* display: grid;
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
-  grid-template-columns: repeat(auto-fill, 240px); */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -17,8 +15,18 @@ const Wrapper = styled.div`
   width: 1030px;
 `;
 
-const Grid = ({ videos }) => (
+const Grid = ({
+  isFetchingVideos,
+  isPristine,
+  videos,
+}) => (
   <Wrapper>
+    <LoadingIcon isLoading={isFetchingVideos} />
+    <EmptyDescription
+      arrayLength={videos.length}
+      isPristine={isPristine}
+      description="沒有符合條件的影片資訊喔！"
+    />
     {
       videos.map(videoInfo => (
         <Card
@@ -31,6 +39,8 @@ const Grid = ({ videos }) => (
 );
 
 Grid.propTypes = {
+  isFetchingVideos: PropTypes.bool.isRequired,
+  isPristine: PropTypes.bool.isRequired,
   videos: PropTypes.arrayOf(PropTypes.shape({
     captions: PropTypes.arrayOf(PropTypes.string),
     duration: PropTypes.number.isRequired,
