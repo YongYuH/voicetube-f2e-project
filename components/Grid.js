@@ -4,8 +4,17 @@ import styled from 'styled-components';
 import Card from './Card';
 
 const Wrapper = styled.div`
-  background-color: white;
   color: black;
+  /* display: grid;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  grid-template-columns: repeat(auto-fill, 240px); */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-top: calc(20px / 3.4 * 7.5);
+  width: 1030px;
 `;
 
 const Grid = ({ videos }) => (

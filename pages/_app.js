@@ -3,6 +3,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 import withReduxSaga from 'next-redux-saga';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import configureStore from '../store';
 
 class MyApp extends App {
@@ -20,9 +21,11 @@ class MyApp extends App {
     const { Component, pageProps, store } = this.props;
     return (
       <Container>
-        <Provider store={store}>
-          <Component {...pageProps} />
-        </Provider>
+        <MuiThemeProvider>
+          <Provider store={store}>
+            <Component {...pageProps} />
+          </Provider>
+        </MuiThemeProvider>
       </Container>
     );
   }

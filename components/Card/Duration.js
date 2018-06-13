@@ -10,7 +10,7 @@ const Time = styled.div`
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
   display: flex;
-  font-family: "HelveticaNeue, Helvetica, Arial, sans-serif";
+  font-family: "SFUIText-Medium";
   font-size: 14px;
   height: 20px;
   justify-content: center;

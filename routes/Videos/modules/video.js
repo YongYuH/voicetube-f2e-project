@@ -9,12 +9,17 @@ import getWithQuery from '../../../utils/api';
 export const FETCH_VIDEOS_REQUEST = 'FETCH_VIDEOS_REQUEST';
 export const FETCH_VIDEOS_SUCCESS = 'FETCH_VIDEOS_SUCCESS';
 export const FETCH_VIDEOS_FAIL = 'FETCH_VIDEOS_FAIL';
+export const SET_DURATION_FILTER_INDEX = 'SET_DURATION_FILTER_INDEX';
+export const SET_SORT_CONDITION = 'SET_SORT_CONDITION';
 
 // - State
 export const initialState = {
   errorMessage: '',
+  durationFilterIndex: 0,
   isFetching: false,
   list: [],
+  processedList: [],
+  sortCondition: '',
 };
 
 // - Reducer
@@ -31,12 +36,33 @@ export const reducer = (state = initialState, action = {}) => {
         errorMessage: '',
         isFetching: false,
         list: action.payload.videos,
+        processedList: action.payload.videos,
       };
     case FETCH_VIDEOS_FAIL:
       return {
         ...state,
         errorMessage: action.payload.message,
         isFetching: false,
+      };
+    case SET_DURATION_FILTER_INDEX:
+      return {
+        ...state,
+        durationFilterMinAndMax: action.payload.durationFilterMinAndMax,
+        processedList: state.list.concat()
+          .filter(video =>
+            (video.duration > action.payload.durationFilterMinAndMax.min
+              && video.duration <= action.payload.durationFilterMinAndMax.max))
+          .sort((a, b) => a[state.sortCondition] < b[state.sortCondition]),
+      };
+    case SET_SORT_CONDITION:
+      return {
+        ...state,
+        processedList: state.processedList.concat()
+          .filter(video =>
+            (video.duration > state.durationFilterMinAndMax.min
+              && video.duration <= state.durationFilterMinAndMax.max))
+          .sort((a, b) => a[action.payload.sortCondition] < b[action.payload.sortCondition]),
+        sortCondition: action.payload.sortCondition,
       };
     default:
       return state;
@@ -57,9 +83,22 @@ export const fetchVideosFail = ({ message }) => ({
   type: FETCH_VIDEOS_FAIL,
   payload: { message },
 });
+export const setDurationFilterIndex = ({ min, max }) => ({
+  type: SET_DURATION_FILTER_INDEX,
+  payload: {
+    durationFilterMinAndMax: { min, max },
+  },
+});
+export const setSortCondition = sortCondition => ({
+  type: SET_SORT_CONDITION,
+  payload: { sortCondition },
+});
 
 // - Selectors
-export const getVideos = state => state.videos.list;
+export const getVideos = state => state.videos.processedList;
+// export const getVideos = state => state.videos.list.filter(function(element, index) {
+//   return index < 6;
+// });
 
 // - Sagas
 export function* fetchVideos() {
@@ -79,6 +118,11 @@ export function* fetchVideos() {
 
     yield put(fetchVideosSuccess({
       videos: data,
+    }));
+    yield put(setSortCondition('publish'));
+    yield put(setDurationFilterIndex({
+      max: Number.MAX_SAFE_INTEGER,
+      min: 0,
     }));
   } catch (error) {
     yield put(fetchVideosFail(error));
