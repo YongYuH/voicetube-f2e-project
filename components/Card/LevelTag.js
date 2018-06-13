@@ -20,6 +20,13 @@ function getLevelTextFromLevel(level) {
 
   if (level === 3) {
     if (userLanguage === 'zh-TW' || userLanguage === 'jp') {
+      return '中高級';
+    }
+    return 'Upper Int';
+  }
+
+  if (level === 4) {
+    if (userLanguage === 'zh-TW' || userLanguage === 'jp') {
       return '高級';
     }
     return 'Advanced';
