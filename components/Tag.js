@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { withCondition } from '../../utils/hoc';
+import { withCondition } from '../utils/hoc';
 
 const Wrapper = styled.div`
   align-items: center;

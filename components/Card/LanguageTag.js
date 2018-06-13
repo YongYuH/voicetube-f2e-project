@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Tag from './Tag';
+import Tag from '../Tag';
 
 function getCaptionLanguageFromUserLanguage(captions) {
   const userLanguage = navigator.language || navigator.userLanguage;
@@ -13,7 +13,7 @@ function getCaptionLanguageFromUserLanguage(captions) {
   }
 
   if (userLanguage === 'vi' && captions.includes('vi')) {
-    return 'vi';
+    return 'Tiếng Việt';
   }
 
   return '';

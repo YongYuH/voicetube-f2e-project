@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Tag from './Tag';
+import Tag from '../Tag';
 
 function getLevelTextFromLevel(level) {
   const userLanguage = navigator.language || navigator.userLanguage;
