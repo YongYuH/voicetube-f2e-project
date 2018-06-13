@@ -9,6 +9,11 @@ const StyledImage = styled.img`
   position: relative;
   top: -23px;
   width: 100%;
+
+  &:hover {
+    transform: scale(2);
+    transition: all 0.3s ease-in-out;
+  }
 `;
 
 const Wrapper = styled.div`
