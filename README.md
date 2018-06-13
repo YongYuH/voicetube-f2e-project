@@ -17,4 +17,4 @@ https://voicetube-f2e.herokuapp.com/
 [styled-components](https://github.com/styled-components/styled-components)(3.3.2): styling  
 
 ## License
-ISC
+MIT
