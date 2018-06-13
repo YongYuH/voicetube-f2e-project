@@ -15,11 +15,14 @@ export const SET_SORT_CONDITION = 'SET_SORT_CONDITION';
 // - State
 export const initialState = {
   errorMessage: '',
-  durationFilterIndex: 0,
+  durationFilterMinAndMax: {
+    max: Number.MAX_SAFE_INTEGER,
+    min: 0,
+  },
   isFetching: false,
   list: [],
   processedList: [],
-  sortCondition: '',
+  sortCondition: 'publish',
 };
 
 // - Reducer
@@ -118,11 +121,6 @@ export function* fetchVideos() {
 
     yield put(fetchVideosSuccess({
       videos: data,
-    }));
-    yield put(setSortCondition('publish'));
-    yield put(setDurationFilterIndex({
-      max: Number.MAX_SAFE_INTEGER,
-      min: 0,
     }));
   } catch (error) {
     yield put(fetchVideosFail(error));
