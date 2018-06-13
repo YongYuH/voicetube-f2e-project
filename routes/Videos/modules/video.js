@@ -20,6 +20,7 @@ export const initialState = {
     min: 0,
   },
   isFetching: false,
+  isPristine: true,
   list: [],
   processedList: [],
   sortCondition: 'publish',
@@ -38,6 +39,7 @@ export const reducer = (state = initialState, action = {}) => {
         ...state,
         errorMessage: '',
         isFetching: false,
+        isPristine: false,
         list: action.payload.videos,
         processedList: action.payload.videos,
       };
@@ -46,11 +48,13 @@ export const reducer = (state = initialState, action = {}) => {
         ...state,
         errorMessage: action.payload.message,
         isFetching: false,
+        isPristine: false,
       };
     case SET_DURATION_FILTER_INDEX:
       return {
         ...state,
         durationFilterMinAndMax: action.payload.durationFilterMinAndMax,
+        isPristine: false,
         processedList: state.list.concat()
           .filter(video =>
             (video.duration > action.payload.durationFilterMinAndMax.min
@@ -60,6 +64,7 @@ export const reducer = (state = initialState, action = {}) => {
     case SET_SORT_CONDITION:
       return {
         ...state,
+        isPristine: false,
         processedList: state.processedList.concat()
           .filter(video =>
             (video.duration > state.durationFilterMinAndMax.min
@@ -98,10 +103,9 @@ export const setSortCondition = sortCondition => ({
 });
 
 // - Selectors
+export const getIsFetchingVideos = state => state.videos.isFetching;
+export const getIsPristine = state => state.videos.isPristine;
 export const getVideos = state => state.videos.processedList;
-// export const getVideos = state => state.videos.list.filter(function(element, index) {
-//   return index < 6;
-// });
 
 // - Sagas
 export function* fetchVideos() {
