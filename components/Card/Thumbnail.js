@@ -11,8 +11,8 @@ const StyledImage = styled.img`
   width: 100%;
 
   &:hover {
-    transform: scale(2);
-    transition: all 0.3s ease-in-out;
+    transform: scale(1.1);
+    transition: all 0.2s ease-in-out;
   }
 `;
 
