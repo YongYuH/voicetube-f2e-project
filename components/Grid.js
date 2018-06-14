@@ -25,7 +25,7 @@ const Grid = ({
     <EmptyDescription
       arrayLength={videos.length}
       isPristine={isPristine}
-      description="沒有符合條件的影片資訊喔！"
+      description="沒有篩選結果"
     />
     {
       videos.map(videoInfo => (
